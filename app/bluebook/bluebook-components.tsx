@@ -63,6 +63,13 @@ function cleanInlineMarkdown(text: string) {
     .replace(/(^|[\s([{])\*([^*\n]+)\*($|[\s.,;:!?)}\]])/g, "$1$2$3");
 }
 
+function cleanPromptLabel(text: string) {
+  return cleanInlineMarkdown(text)
+    .replace(/^Plain Text\s*/i, "")
+    .replace(/^text\s+/i, "")
+    .trimStart();
+}
+
 function PagerLink({ id, label }: { id: string | null; label: string }) {
   if (!id) {
     return null;
@@ -85,7 +92,7 @@ export function PlaybookShell({ activeId, children }: PlaybookShellProps) {
         <Link className="wordmark" href="/">
           <img src={assetPath("/brand/basil-wordmark.png")} alt="BasilAOS Work" />
         </Link>
-        <span className="book-site">Workbench Playbook</span>
+        <span className="book-site">AOS Work Playbook</span>
         <div className="nav-spacer" />
         <Link href="/solve-it">Scenario Co-Creation</Link>
         <ThemeToggle />
@@ -107,7 +114,7 @@ export function PlaybookShell({ activeId, children }: PlaybookShellProps) {
                 <path d="M16 32H24" stroke="currentColor" />
               </svg>
             </span>
-            <strong>Workbench Playbook</strong>
+            <strong>AOS Work Playbook</strong>
           </div>
 
           {playbookChapters.map((chapter) => (
@@ -212,6 +219,10 @@ function BlockView({ block, index }: { block: PlaybookBlock; index: number }) {
 
   const singleText = singleCellText(block);
 
+  if (singleText.includes("Scenario A (Generate JD)") && singleText.includes("Candidate status updated")) {
+    return <HrScenarioChainDiagram />;
+  }
+
   if (singleText.includes("my-skill/") && singleText.includes("SKILL.md")) {
     return <SkillFolderDiagram />;
   }
@@ -227,7 +238,7 @@ function BlockView({ block, index }: { block: PlaybookBlock; index: number }) {
   }
 
   if (body.length === 0 && head.length === 1) {
-    return <blockquote>{cleanInlineMarkdown(head[0])}</blockquote>;
+    return <blockquote>{cleanPromptLabel(head[0])}</blockquote>;
   }
 
   return (
@@ -255,32 +266,33 @@ function BlockView({ block, index }: { block: PlaybookBlock; index: number }) {
 }
 
 function AiTaskFlowDiagram() {
-  const rows = [
-    ["User goal + materials", "->", "Agent plans", "->", "LLM understands & generates"],
-    ["", "", "↓", "", "↓"],
-    ["", "", "Skill methods & scripts", "", "Intermediate results"],
-    ["", "", "↓", "", "↓"],
-    ["", "", "Tool / Connector", "->", "Checkpoint & review -> Final output"],
-    ["", "", "↓", "", ""],
-    ["", "", "MCP / API -> Files, spreadsheets & business systems", "", ""],
-  ];
-
   return (
     <figure className="ai-flow-diagram" aria-label="What happens inside an AI task">
-      <figcaption>Code block</figcaption>
-      <div className="ai-flow-code" role="list">
-        {rows.map((cells, index) => (
-          <div className="ai-flow-code-row" role="listitem" key={index}>
-            <span className="ai-flow-line-number">{index + 1}</span>
-            <code className="ai-flow-code-line">
-              {cells.map((cell, cellIndex) => (
-                <span className={cell === "↓" || cell === "->" ? "ai-flow-symbol" : ""} key={`${cell}-${cellIndex}`}>
-                  {cell}
-                </span>
-              ))}
-            </code>
-          </div>
-        ))}
+      <div className="ai-flow-map">
+        <span className="ai-flow-text ai-flow-user">User goal + materials</span>
+        <span className="ai-flow-arrow ai-flow-arrow-a" aria-hidden="true">→</span>
+        <span className="ai-flow-text ai-flow-plan">Agent plans</span>
+        <span className="ai-flow-arrow ai-flow-arrow-b" aria-hidden="true">→</span>
+        <span className="ai-flow-text ai-flow-llm">LLM understands &amp; generates</span>
+
+        <span className="ai-flow-arrow ai-flow-down-a" aria-hidden="true">↓</span>
+        <span className="ai-flow-arrow ai-flow-down-b" aria-hidden="true">↓</span>
+
+        <span className="ai-flow-text ai-flow-skill">Skill methods &amp; scripts</span>
+        <span className="ai-flow-text ai-flow-results">Intermediate results</span>
+
+        <span className="ai-flow-arrow ai-flow-down-c" aria-hidden="true">↓</span>
+        <span className="ai-flow-arrow ai-flow-down-d" aria-hidden="true">↓</span>
+
+        <span className="ai-flow-text ai-flow-tool">Tool / Connector</span>
+        <span className="ai-flow-arrow ai-flow-arrow-c" aria-hidden="true">→</span>
+        <span className="ai-flow-text ai-flow-review">Checkpoint &amp; review</span>
+        <span className="ai-flow-arrow ai-flow-arrow-d" aria-hidden="true">→</span>
+        <span className="ai-flow-text ai-flow-final">Final output</span>
+
+        <span className="ai-flow-arrow ai-flow-down-e" aria-hidden="true">↓</span>
+
+        <span className="ai-flow-text ai-flow-mcp">MCP / API → Files, spreadsheets &amp; business systems</span>
       </div>
     </figure>
   );
@@ -380,6 +392,67 @@ function WorkflowDiagram() {
             <span>Archive or publish</span>
           </div>
         </div>
+      </div>
+    </figure>
+  );
+}
+
+function HrScenarioChainDiagram() {
+  const lanes = [
+    {
+      label: "Scenario A",
+      title: "Generate JD",
+      steps: [
+        ["Role Brief", "Collect role goals, requirements, must-haves"],
+        ["JD Draft", "Generate channel-ready job description"],
+        ["Publish", "Send to hiring channels and job boards"],
+      ],
+    },
+    {
+      label: "Scenario B",
+      title: "Screen Resumes",
+      steps: [
+        ["Resume Intake", "New resumes land in the same candidate Base"],
+        ["Match Ranking", "Score skills, experience, language, availability"],
+        ["Interview Queue", "Shortlist candidates and schedule interviews"],
+      ],
+    },
+    {
+      label: "Close Loop",
+      title: "Update Candidate Status",
+      steps: [
+        ["Interview Notes", "Write feedback back to the candidate record"],
+        ["Status Update", "Move each candidate to the next hiring stage"],
+      ],
+    },
+  ];
+
+  return (
+    <figure className="hr-chain-diagram" aria-label="HR hiring scenario chain">
+      <figcaption>HR Scenario Chain</figcaption>
+      <div className="hr-chain-lanes">
+        {lanes.map((lane) => (
+          <section className="hr-chain-lane" key={lane.label}>
+            <div className="hr-chain-lane-head">
+              <small>{lane.label}</small>
+              <strong>{lane.title}</strong>
+            </div>
+            <div className="hr-chain-steps">
+              {lane.steps.map(([title, body], index) => (
+                <div className="hr-chain-step" key={title}>
+                  <span>{String(index + 1).padStart(2, "0")}</span>
+                  <strong>{title}</strong>
+                  <p>{body}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+        ))}
+      </div>
+      <div className="hr-chain-base">
+        <small>Shared Base</small>
+        <strong>One structured candidate table carries the whole workflow.</strong>
+        <p>JD requirements, resumes, rankings, interview feedback, reminders, and final status stay connected without switching tools.</p>
       </div>
     </figure>
   );

@@ -3,8 +3,8 @@ import Script from "next/script";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "BasilAOS Workbench Playbook",
-  description: "Scenario co-creation and the BasilAOS Workbench Playbook.",
+  title: "AOS Work Playbook",
+  description: "Scenario co-creation and the AOS Work Playbook.",
   icons: {
     icon: "/favicon.svg",
     shortcut: "/favicon.svg",

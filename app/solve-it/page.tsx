@@ -6,7 +6,7 @@ import { ThemeToggle } from "../theme-toggle";
 export const metadata: Metadata = {
   title: "BasilAOS · Scenario Co-Creation",
   description:
-    "Submit a real work scenario and explore the BasilAOS Workbench Playbook.",
+    "Submit a real work scenario and explore the AOS Work Playbook.",
 };
 
 const steps = [
@@ -46,7 +46,7 @@ export default function ScenarioCoCreationPage() {
           </Link>
           <span className="nav-tag">Scenario Co-Creation</span>
           <div className="nav-spacer" />
-          <Link href="/bluebook/">Workbench Playbook</Link>
+          <Link href="/bluebook/">AOS Work Playbook</Link>
           <ThemeToggle />
         </nav>
 
@@ -142,7 +142,7 @@ export default function ScenarioCoCreationPage() {
             daily task chain behind your role, and it can become a reusable
             Workbench case.
           </p>
-          <Link href="/bluebook/">Explore the Workbench Playbook</Link>
+          <Link href="/bluebook/">Explore the AOS Work Playbook</Link>
         </section>
       </div>
     </main>

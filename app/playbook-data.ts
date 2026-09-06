@@ -7,7 +7,7 @@ export type PlaybookBlock =
 export type PlaybookSection = { id: string; title: string; chapterId: string; chapterTitle: string; index: number; prev: string | null; next: string | null; summary: string; blocks: PlaybookBlock[] };
 export type PlaybookChapter = { id: string; title: string; sections: Array<{ id: string; title: string }> };
 
-export const playbookTitle = "BasilAOS Workbench Playbook";
+export const playbookTitle = "AOS Work Playbook";
 export const playbookChapters: PlaybookChapter[] = [
   {
     "id": "chapter-1-meet-basil-agentos-your-new-work-partner",
@@ -145,7 +145,7 @@ export const playbookChapters: PlaybookChapter[] = [
       },
       {
         "id": "appendix-the-ai-work-system-in-one-chapter",
-        "title": "Appendix: The AI Work System in One Chapter"
+        "title": "4.6 Appendix: The AI Work System in One Chapter"
       }
     ]
   }
@@ -5031,9 +5031,9 @@ export const playbookSections: PlaybookSection[] = [
             "Where to find"
           ],
           [
-            "image-generator Skill",
+            "OpenAI Image Generation Connector",
             "8 generation/editing capabilities for fashion e-commerce design teams: upscale, model-to-lifestyle, garment-to-flat-sketch, flat-lay-to-3D-wear, fabric recolor, half-body completion, and reference-style generation",
-            "Explore → search image-generator"
+            "Explore → Connectors → OpenAI Image Generation"
           ],
           [
             "Library",
@@ -5876,13 +5876,13 @@ export const playbookSections: PlaybookSection[] = [
             "Public info only; Instagram/Facebook stability affected by anti-scraping measures"
           ],
           [
-            "image-generator",
+            "OpenAI Image Generation Connector",
             "8 editing/generation capabilities for fashion e-commerce",
             "Scenario B",
             "Start from existing Library assets"
           ],
           [
-            "video-generation",
+            "HappyHorse Video Generator",
             "Supports text-to-video, first-frame-to-video, multi-reference-to-video — produces 15-second marketing clips in minutes (720P/1080P, multiple aspect ratios)",
             "Scenario C",
             "Start from existing Library assets"
@@ -10318,7 +10318,7 @@ export const playbookSections: PlaybookSection[] = [
   },
   {
     "id": "appendix-the-ai-work-system-in-one-chapter",
-    "title": "Appendix: The AI Work System in One Chapter",
+    "title": "4.6 Appendix: The AI Work System in One Chapter",
     "chapterId": "chapter-4-project-skill-work-turn-one-time-wins-into-a-system",
     "chapterTitle": "Chapter 4 · Project, Skill & Work — Turn One-Time Wins Into a System",
     "index": 29,
