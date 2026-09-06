@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { assetPath } from "../site-paths";
 import { ThemeToggle } from "../theme-toggle";
 
 export const metadata: Metadata = {
@@ -41,7 +42,7 @@ export default function ScenarioCoCreationPage() {
       <div className="dark-wrap">
         <nav className="dark-nav" aria-label="Primary">
           <Link className="wordmark" href="/">
-            <img src="/brand/basil-wordmark.png" alt="BasilAOS Work" />
+            <img src={assetPath("/brand/basil-wordmark.png")} alt="BasilAOS Work" />
           </Link>
           <span className="nav-tag">Scenario Co-Creation</span>
           <div className="nav-spacer" />

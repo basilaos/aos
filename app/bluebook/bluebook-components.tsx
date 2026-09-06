@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { ThemeToggle } from "../theme-toggle";
+import { assetPath } from "../site-paths";
 import {
   getSectionById,
   playbookChapters,
@@ -82,7 +83,7 @@ export function PlaybookShell({ activeId, children }: PlaybookShellProps) {
     <main className="book-page">
       <header className="book-topbar">
         <Link className="wordmark" href="/">
-          <img src="/brand/basil-wordmark.png" alt="BasilAOS Work" />
+          <img src={assetPath("/brand/basil-wordmark.png")} alt="BasilAOS Work" />
         </Link>
         <span className="book-site">Workbench Playbook</span>
         <div className="nav-spacer" />
@@ -190,7 +191,7 @@ function BlockView({ block, index }: { block: PlaybookBlock; index: number }) {
   if (block.type === "image") {
     return (
       <figure className="doc-image">
-        <img src={block.src} alt={block.alt || `Playbook image ${index + 1}`} />
+        <img src={assetPath(block.src)} alt={block.alt || `Playbook image ${index + 1}`} />
       </figure>
     );
   }

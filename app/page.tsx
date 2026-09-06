@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { playbookSections } from "./playbook-data";
+import { assetPath } from "./site-paths";
 
 export const metadata: Metadata = {
   title: "BasilAOS Workbench Playbook",
@@ -107,8 +108,8 @@ export default function HomePage() {
       <header className="home-hero">
         <nav className="home-nav" aria-label="Primary navigation">
           <Link className="wordmark" href="/">
-            <img src="/brand/basil-wordmark.png" alt="BasilAOS Work" />
-            <img className="home-wordmark-symbol" src="/brand/basil-icon.svg" alt="" aria-hidden="true" />
+            <img src={assetPath("/brand/basil-wordmark.png")} alt="BasilAOS Work" />
+            <img className="home-wordmark-symbol" src={assetPath("/brand/basil-icon.svg")} alt="" aria-hidden="true" />
           </Link>
           <div className="home-nav-spacer" />
           <Link href="/">Home</Link>

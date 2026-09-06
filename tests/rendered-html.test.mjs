@@ -61,7 +61,7 @@ test("builds the playbook as docx-sourced section pages with inserted images", a
   assert.match(sectionPage, /SectionArticle/);
   assert.match(components, /section\.blocks\.map/);
   assert.doesNotMatch(components, /section\.summary/);
-  assert.match(components, /<img src=\{block\.src\}/);
+  assert.match(components, /<img src=\{assetPath\(block\.src\)\}/);
   assert.match(components, /WorkflowDiagram/);
   assert.match(components, /AiTaskFlowDiagram/);
   assert.match(components, /ai-flow-diagram/);
