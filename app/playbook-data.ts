@@ -2322,7 +2322,7 @@ export const playbookSections: PlaybookSection[] = [
           ],
           [
             {
-              "text": "Tell the Agent what language you want the summary in and what dimensions to focus o"
+              "text": "Tell the Agent what language you want the summary in and what dimensions to focus on"
             }
           ]
         ]
