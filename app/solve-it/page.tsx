@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { assetPath } from "../site-paths";
 import { ThemeToggle } from "../theme-toggle";
+import { ScenarioForm } from "./scenario-form";
 
 export const metadata: Metadata = {
   title: "BasilAOS · Scenario Co-Creation",
@@ -95,48 +96,14 @@ export default function ScenarioCoCreationPage() {
         <section className="dark-section" id="scenario-form">
           <h2>Submit your scenario</h2>
           <p className="form-dek">
-            Use this as the first version of the intake page. The form is
-            intentionally local-only for now, so no information is sent out.
+            Share the real workflow, inputs, constraints, and output you need.
+            Your submission will be sent to the BasilOS support team.
           </p>
-          <form className="form-card">
-            <div className="field-row">
-              <label>
-                Your Name
-                <input placeholder="Your full name" />
-              </label>
-              <label>
-                Email
-                <input placeholder="your.email@company.com" />
-              </label>
-            </div>
-            <div className="field-row">
-              <label>
-                Department
-                <input placeholder="e.g., Operations, E-commerce" />
-              </label>
-              <label>
-                Role
-                <input placeholder="e.g., Amazon Operations Specialist" />
-              </label>
-            </div>
-            <label>
-              Scenario Title
-              <input placeholder="One sentence describing your work scenario" />
-            </label>
-            <label>
-              Scenario Description
-              <textarea placeholder="What scenario do you encounter? What problem are you trying to solve?" />
-            </label>
-            <label>
-              Expected Outcome
-              <textarea placeholder="What should Workbench deliver? What does done look like?" />
-            </label>
-            <button type="button">Submit Scenario</button>
-          </form>
+          <ScenarioForm />
         </section>
 
         <section className="dark-cta">
-          <h2>What's your Work?</h2>
+          <h2>What&apos;s your Work?</h2>
           <p>
             One Skill solves one task. One Work solves an entire job. Share the
             daily task chain behind your role, and it can become a reusable
