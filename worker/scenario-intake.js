@@ -139,7 +139,10 @@ export default {
     if (!resendResponse.ok) {
       const errorText = await resendResponse.text();
       console.error("Resend failed", errorText);
-      return jsonResponse({ message: "Could not send the submission." }, { status: 502, headers });
+      return jsonResponse(
+        { message: `Could not send the submission. Resend said: ${errorText.slice(0, 500)}` },
+        { status: 502, headers },
+      );
     }
 
     return jsonResponse({ ok: true, message: "Scenario submitted." }, { status: 200, headers });
